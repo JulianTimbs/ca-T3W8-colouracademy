@@ -6,7 +6,8 @@ import { ColourBlock } from "../components/ColourBlock";
 import PureModal from 'react-pure-modal';
 import 'react-pure-modal/dist/react-pure-modal.min.css';
 import { CssCodeExport } from "../components/CssCodeExport";
-
+import { PreviewCard } from "../components/PreviewComponent";
+import "../styles/GeneratorPage.css"
 
 
 
@@ -50,15 +51,35 @@ export default function GeneratorPage(){
                 >
                 <CssCodeExport />
             </PureModal>
-            <button onClick={() => setModal(!modal)}>
-                Toggle Modal
-            </button>
-            <h1>{formBaseColour}</h1>
-            <Sketch color={formBaseColour} onChange={(colour) => setFormBaseColour(colour.hex)} />
+            
+            <div className="row">
+                <h1>{formBaseColour}</h1>
+                <Sketch color={formBaseColour} onChange={(colour) => setFormBaseColour(colour.hex)} />
+                <button onClick={() => setModal(!modal)}>
+                    Toggle Modal
+                </button>
+            </div>
 
-        {currentTheme.colours?.map((colourEntry, index) => {
-            return <ColourBlock key={currentTheme.name + index} colourEntry={colourEntry} />
-        })}
+            <div className="row">
+                {currentTheme.colours?.map((colourEntry, index) => {
+                    return <PreviewCard key={currentTheme.name + index} textColour="black" colourEntry={colourEntry} />
+                })}
+            </div>
+
+            <div className="row">
+                {currentTheme.colours?.map((colourEntry, index) => {
+                    return <PreviewCard key={currentTheme.name + index} textColour="white" colourEntry={colourEntry} />
+                })}
+            </div>
+
+            <div className="row">
+                {currentTheme.colours?.map((colourEntry, index) => {
+                    return <ColourBlock key={currentTheme.name + index} colourEntry={colourEntry} />
+                })}
+            </div>
+
+            
+        
         </div>
     )
 }
